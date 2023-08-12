@@ -1,3 +1,4 @@
+import { prisma } from "@/db";
 import Link from "next/link";
 
 export default function New() {
@@ -6,7 +7,7 @@ export default function New() {
       <header>
         <h1 className="text-2xl">New Todo Item</h1>
       </header>
-      <form className="flex gap-2 flex-col">
+      <form action={createTodoItem} className="flex gap-2 flex-col">
         <input
           type="text"
           name="title"
@@ -30,3 +31,16 @@ export default function New() {
     </>
   );
 }
+
+async function createTodoItem(data: FormData) {
+  "use server"; //it means this function is a server code and it will never run in the client. it only runs on the server even if a log is within this function it will not be printed
+
+  const title = data.get("title")?.valueOf();
+
+  if (typeof title !== "string" || title.length === 0) {
+    return new Error("Invalid Title");
+  }
+
+  await prisma.todo.create({ data: { title: title, complete: false } });
+}
+	
