@@ -2,27 +2,45 @@ import { TodoItem } from "@/components/TodoItem";
 import { prisma } from "@/db";
 import Link from "next/link";
 
-export default async function Home(){
+export default async function Home() {
   const todos = await getTodos();
 
   // await prisma.todo.create({data : {title: "test", complete: true}})
 
-  return <>
-    <header className="flex justify-between items-center">
-      <h1 className="text-2xl">Todos</h1>
-      <Link href="/new" className="border border-slate-300 text-slate-300 rounded px-2 py-1 hover:bg-slate-700 focus-within:bg-slate-700 outline-none">New</Link>
-    </header>
-    <ul className="pl-4">
-      {todos.map(todo => (
-        // <li key={todo.id}> {todo.title} </li>
+  return (
+    <>
+      <header className="flex justify-between items-center">
+        <h1 className="text-2xl">Todos</h1>
+        <Link
+          href="/new"
+          className="border border-slate-300 text-slate-300 rounded px-2 py-1 hover:bg-slate-700 focus-within:bg-slate-700 outline-none"
+        >
+          New
+        </Link>
+      </header>
+      <ul className="pl-4">
+        {todos.map((todo) => (
+          // <li key={todo.id}> {todo.title} </li>
 
-        <TodoItem key={todo.id} {...todo} />
-      ))}
-      
-    </ul>
-  </>
+          <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} />
+        ))}
+      </ul>
+    </>
+  );
 }
 
-function getTodos(){
+async function toggleTodo(id: string, complete: boolean) {
+  "use server";
+  await prisma.todo.update({
+    where: {
+      id: id,
+    },
+    data: {
+      complete: complete,
+    },
+  });
+}
+
+function getTodos() {
   return prisma.todo.findMany();
 }

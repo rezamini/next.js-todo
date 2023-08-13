@@ -7,13 +7,14 @@ type TodoItemProps = {
   toggleTodo: (id: string, complete: boolean) => void;
 };
 
-export function TodoItem({ id, title, complete }: TodoItemProps) {
+export function TodoItem({ id, title, complete, toggleTodo }: TodoItemProps) {
   return (
     <li className="flex gap-1 items-center">
       <input
         id={id}
         type="checkbox"
         defaultChecked={complete}
+        onChange={e => toggleTodo(id, e.target.checked)}
         className="cursor-pointer peer"
       />
       <label
