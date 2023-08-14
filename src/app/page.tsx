@@ -30,7 +30,7 @@ export default async function Home() {
 }
 
 async function toggleTodo(id: string, complete: boolean) {
-  "use server";
+  "use server"
   await prisma.todo.update({
     where: {
       id: id,
