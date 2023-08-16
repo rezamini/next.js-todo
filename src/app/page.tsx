@@ -9,8 +9,8 @@ export default async function Home() {
 
   return (
     <>
-      <header className="flex justify-between items-center">
-        <h1 className="text-2xl">Todos</h1>
+      <header className="flex justify-between items-center pb-5">
+        <h1 className="text-2xl underline underline-offset-4 ">Todos</h1>
         <Link
           href="/new"
           className="border border-slate-300 text-slate-300 rounded px-2 py-1 hover:bg-slate-700 focus-within:bg-slate-700 outline-none"
