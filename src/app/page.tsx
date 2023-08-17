@@ -13,7 +13,7 @@ export default async function Home() {
         <h1 className="text-2xl underline underline-offset-4 ">Todos</h1>
         <Link
           href="/new"
-          className="border border-slate-300 text-slate-300 rounded px-2 py-1 hover:bg-slate-700 focus-within:bg-slate-700 outline-none"
+          className="border border-slate-300 text-slate-300 rounded px-2 py-1 hover:bg-zinc-700 focus-within:bg-zinc-700 outline-none"
         >
           New
         </Link>
