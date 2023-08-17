@@ -5,8 +5,8 @@ import Link from "next/link";
 export default function New() {
   return (
     <>
-      <header>
-        <h1 className="text-2xl">New Todo Item</h1>
+      <header className="flex pb-5">
+        <h1 className="text-2xl underline underline-offset-4">New Todo Item: </h1>
       </header>
       <form action={createTodoItem} className="flex gap-2 flex-col">
         <input
