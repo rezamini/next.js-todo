@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
+import deleteButton from "../../public/delete-button.png";
 
 type TodoItemProps = {
   id: string;
@@ -10,15 +12,14 @@ type TodoItemProps = {
 };
 
 // export function TodoItem({ id, title, complete, toggleTodo, deleteTodo }: TodoItemProps) {
-export function TodoItem( props : TodoItemProps) {
+export function TodoItem(props: TodoItemProps) {
   // const [data, setData] = useState<TodoItemProps>({ id, title, complete, toggleTodo, deleteTodo });
   const [data, setData] = useState<TodoItemProps>(props);
 
-  async function performToggleTodo(id: string, complete: boolean){
+  async function performToggleTodo(id: string, complete: boolean) {
     data.toggleTodo(id, complete);
-    setData(data => ({...data, complete: complete}));
+    setData((data) => ({ ...data, complete: complete }));
     // setData({...data});
-
   }
 
   return (
@@ -37,7 +38,17 @@ export function TodoItem( props : TodoItemProps) {
       >
         {data.title}
       </label>
-      
+      {data.complete && (
+        <Image
+          src={deleteButton}
+          alt="delete button"
+          onClick={(e) => alert("This will delete the item")}
+          // width={25} // automatically provided based on the imported file if commented out
+          // height={25} // automatically provided based on the imported file if commented out
+          // blurDataURL="data:..." automatically provided
+          // placeholder="blur" // Optional blur-up while loading
+        />
+      )}
     </li>
   );
 }
