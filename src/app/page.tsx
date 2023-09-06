@@ -22,7 +22,7 @@ export default async function Home() {
         {todos.map((todo) => (
           // <li key={todo.id}> {todo.title} </li>
 
-          <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} />
+          <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
         ))}
       </ul>
     </>
@@ -39,6 +39,11 @@ async function toggleTodo(id: string, complete: boolean) {
       complete: complete,
     },
   });
+}
+
+async function deleteTodo(id: string){
+  "use server"
+  //delete the todo item
 }
 
 function getTodos() {
