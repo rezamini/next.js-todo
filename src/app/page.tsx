@@ -41,9 +41,16 @@ async function toggleTodo(id: string, complete: boolean) {
   });
 }
 
-async function deleteTodo(id: string){
+async function deleteTodo(id: string) {
   "use server"
-  //delete the todo item
+  await prisma.todo.update({
+    where: {
+      id: id,
+    },
+    data: {
+      deleted: true,
+    }
+  })
 }
 
 function getTodos() {
