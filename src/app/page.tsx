@@ -48,7 +48,7 @@ async function toggleTodo(id: string, complete: boolean) {
 
 async function deleteTodo(id: string) {
   "use server";
-  await prisma.todo.update({
+  const updatedUser = await prisma.todo.update({
     where: {
       id: id,
     },
