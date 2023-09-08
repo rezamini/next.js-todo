@@ -24,6 +24,12 @@ export function TodoItem(props: TodoItemProps) {
     // setData({...data});
   }
 
+  async function confirmDelete(id: string) {
+    if (confirm("Are you sure you want to remove this item?") == true) {
+      data.deleteTodo(id);
+    }
+  }
+
   return (
     <li className="flex gap-1 items-center">
       <input
@@ -44,7 +50,7 @@ export function TodoItem(props: TodoItemProps) {
         <Image
           src={deleteButton}
           alt="delete button"
-          onClick={(e) => alert("This will delete the item")}
+          onClick={(e) => confirmDelete(data.id)}
           // width={25} // automatically provided based on the imported file if commented out
           // height={25} // automatically provided based on the imported file if commented out
           // blurDataURL="data:..." automatically provided
