@@ -22,7 +22,12 @@ export default async function Home() {
         {todos.map((todo) => (
           // <li key={todo.id}> {todo.title} </li>
 
-          <TodoItem key={todo.id} {...todo} toggleTodo={toggleTodo} deleteTodo={deleteTodo}/>
+          <TodoItem
+            key={todo.id}
+            {...todo}
+            toggleTodo={toggleTodo}
+            deleteTodo={deleteTodo}
+          />
         ))}
       </ul>
     </>
@@ -30,7 +35,7 @@ export default async function Home() {
 }
 
 async function toggleTodo(id: string, complete: boolean) {
-  "use server"
+  "use server";
   await prisma.todo.update({
     where: {
       id: id,
@@ -42,17 +47,23 @@ async function toggleTodo(id: string, complete: boolean) {
 }
 
 async function deleteTodo(id: string) {
-  "use server"
+  "use server";
   await prisma.todo.update({
     where: {
       id: id,
     },
     data: {
       deleted: true,
-    }
-  })
+    },
+  });
 }
 
 function getTodos() {
-  return prisma.todo.findMany();
+  return prisma.todo.findMany({
+    where: {
+      deleted: {
+        not: true,
+      },
+    },
+  });
 }
