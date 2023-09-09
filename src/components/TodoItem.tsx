@@ -3,16 +3,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import deleteButton from "../../public/delete-button.png";
+import { TodoType } from "@/app/page";
 
-type TodoItemProps = {
-  id: string;
-  title: string;
-  complete: boolean;
-  deleted: boolean;
-  // toggleTodo: (id: string, complete: boolean) => Promise<boolean> ;
+type TodoItemProps = TodoType & {
   toggleTodo: (id: string, complete: boolean) => void;
   deleteTodo: (id: string) => void;
 };
+
+// type TodoItemProps = {
+//   id: string;
+//   title: string;
+//   complete: boolean;
+//   deleted: boolean;
+//   // toggleTodo: (id: string, complete: boolean) => Promise<boolean> ;
+//   toggleTodo: (id: string, complete: boolean) => void;
+//   deleteTodo: (id: string) => Promise<TodoType>;
+// };
 
 // export function TodoItem({ id, title, complete, toggleTodo, deleteTodo }: TodoItemProps) {
 export function TodoItem(props: TodoItemProps) {

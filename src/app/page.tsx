@@ -2,9 +2,15 @@ import { TodoItem } from "@/components/TodoItem";
 import { prisma } from "@/db";
 import Link from "next/link";
 
+export type TodoType = {
+  id: string;
+  title: string;
+  complete: boolean;
+  deleted: boolean;
+};
+
 export default async function Home() {
   const todos = await getTodos();
-
   // await prisma.todo.create({data : {title: "test", complete: true}})
 
   return (
