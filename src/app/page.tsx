@@ -52,9 +52,9 @@ async function toggleTodo(id: string, complete: boolean) {
   });
 }
 
-async function deleteTodo(id: string) {
+async function deleteTodo(id: string): Promise<TodoType> {
   "use server";
-  const updatedUser = await prisma.todo.update({
+  const deletedTodo = await prisma.todo.update({
     where: {
       id: id,
     },
@@ -62,6 +62,8 @@ async function deleteTodo(id: string) {
       deleted: true,
     },
   });
+
+  return deletedTodo;
 }
 
 function getTodos() {

@@ -7,7 +7,7 @@ import { TodoType } from "@/app/page";
 
 type TodoItemProps = TodoType & {
   toggleTodo: (id: string, complete: boolean) => void;
-  deleteTodo: (id: string) => void;
+  deleteTodo: (id: string) => Promise<TodoType>;
 };
 
 // type TodoItemProps = {
@@ -40,33 +40,33 @@ export function TodoItem(props: TodoItemProps) {
 
   return (
     !data.deleted && (
-      <li className="flex gap-1 items-center">
-        <input
-          id={data.id}
-          type="checkbox"
-          defaultChecked={data.complete}
-          // onChange={(e) => toggleTodo(id, e.target.checked)}
-          onChange={(e) => performToggleTodo(data.id, e.target.checked)}
-          className="cursor-pointer peer accent-zinc-400"
+    <li className="flex gap-1 items-center">
+      <input
+        id={data.id}
+        type="checkbox"
+        defaultChecked={data.complete}
+        // onChange={(e) => toggleTodo(id, e.target.checked)}
+        onChange={(e) => performToggleTodo(data.id, e.target.checked)}
+        className="cursor-pointer peer accent-zinc-400"
+      />
+      <label
+        htmlFor={data.id}
+        className="cursor-pointer peer-checked:line-through peer-checked:text-zinc-400"
+      >
+        {data.title}
+      </label>
+      {data.complete && (
+        <Image
+          src={deleteButton}
+          alt="delete button"
+          onClick={(e) => confirmDelete(data.id)}
+          // width={25} // automatically provided based on the imported file if commented out
+          // height={25} // automatically provided based on the imported file if commented out
+          // blurDataURL="data:..." automatically provided
+          // placeholder="blur" // Optional blur-up while loading
         />
-        <label
-          htmlFor={data.id}
-          className="cursor-pointer peer-checked:line-through peer-checked:text-zinc-400"
-        >
-          {data.title}
-        </label>
-        {data.complete && (
-          <Image
-            src={deleteButton}
-            alt="delete button"
-            onClick={(e) => confirmDelete(data.id)}
-            // width={25} // automatically provided based on the imported file if commented out
-            // height={25} // automatically provided based on the imported file if commented out
-            // blurDataURL="data:..." automatically provided
-            // placeholder="blur" // Optional blur-up while loading
-          />
-        )}
-      </li>
+      )}
+    </li>
     )
   );
 }
