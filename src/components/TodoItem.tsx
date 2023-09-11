@@ -33,8 +33,10 @@ export function TodoItem(props: TodoItemProps) {
 
   async function confirmDelete(id: string) {
     if (confirm("Are you sure you want to remove this item?") == true) {
-      data.deleteTodo(id);
-      setData((data) => ({...data, deleted: true}));
+      const deletedTodo = await data.deleteTodo(id);
+      
+      setData((data) => ({...data, ...deletedTodo}));
+      // setData({...data, ...deletedTodo}); //identical in this case
     }
   }
 
