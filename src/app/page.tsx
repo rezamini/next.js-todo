@@ -73,5 +73,8 @@ function getTodos() {
         not: true,
       },
     },
+    orderBy: {
+      createdAt: "asc",
+    }
   });
 }
