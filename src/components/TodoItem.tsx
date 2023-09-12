@@ -62,8 +62,8 @@ export function TodoItem(props: TodoItemProps) {
           src={deleteButton}
           alt="delete button"
           onClick={(e) => confirmDelete(data.id)}
-          // width={25} // automatically provided based on the imported file if commented out
-          // height={25} // automatically provided based on the imported file if commented out
+          width={25} // automatically provided based on the imported file if commented out
+          height={25} // automatically provided based on the imported file if commented out
           // blurDataURL="data:..." automatically provided
           // placeholder="blur" // Optional blur-up while loading
         />
